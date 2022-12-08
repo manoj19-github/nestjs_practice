@@ -1,12 +1,16 @@
+/* eslint-disable prettier/prettier */
 export interface IUser {
-  id: number;
-  name: string;
-  address: string;
-  marks: number;
+  username: string;
+  password: string;
+  email: string;
 }
 
 export interface IAddUserPayload {
   name: string;
   address: string;
   marks: number;
+}
+export interface VUser {
+  username: string;
+  email: string;
 }

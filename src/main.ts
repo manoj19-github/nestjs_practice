@@ -6,7 +6,7 @@ import globalMiddlewareOne from './middlewares/global';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(globalMiddlewareOne);
-  app.use(BooksGuard);
+  // app.useGlobalGuards(new BooksGuard());
   await app.listen(4000);
 }
 bootstrap();

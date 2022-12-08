@@ -6,7 +6,7 @@ import {
   Put,
   ValidationPipe,
 } from '@nestjs/common';
-import { Body, UseGuards } from '@nestjs/common/decorators';
+import { Body, UseGuards, UseInterceptors } from '@nestjs/common/decorators';
 import { AddBookPipe } from './books.pipe';
 import {
   BookClass,
@@ -16,8 +16,11 @@ import {
 } from './books.dto';
 import { BooksService } from './books.service';
 import { BooksGuard } from './books.guard';
+import { BooksInterceptor } from './books.interceptor';
+import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 
 @Controller('books')
+@UseInterceptors(BooksInterceptor)
 @UseGuards(BooksGuard)
 export class BooksController {
   constructor(private booksService: BooksService) {}
@@ -25,6 +28,7 @@ export class BooksController {
   getAllBooks(): string {
     return this.booksService.getMyBooks();
   }
+  @UseGuards(AuthGuard('local'))
   @Post('/')
   addBook(@Body(new ValidationPipe()) body: BookClass): BooksDto[] {
     return this.booksService.addBooks(body);
