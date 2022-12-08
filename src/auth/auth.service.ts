@@ -10,12 +10,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
   ) {}
-  generateToken(payload: IUser) {
+  generateToken(payload: { username: string; password: string }) {
     const user = this.usersService.getUserByName(payload.username);
     if (user && user.password === payload.password) {
       return {
-        user: { username: user.username, email: user.email },
-        token: this.jwtService.sign(payload),
+        user: { username: user.username, email: user.email, role: user.role },
+        token: this.jwtService.sign(user),
       };
     }
     return new UnauthorizedException();

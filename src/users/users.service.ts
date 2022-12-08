@@ -8,6 +8,19 @@ export class UsersService {
       username: 'user1',
       password: 'admin',
       email: 'admin@example.com',
+      role: 'admin',
+    },
+    {
+      username: 'user2',
+      password: 'vendor',
+      email: 'vendor@example.com',
+      role: 'vendor',
+    },
+    {
+      username: 'user3',
+      password: 'customer',
+      email: 'customer@example.com',
+      role: 'customer',
     },
   ];
   getUserByName(userName: string): IUser | undefined {
